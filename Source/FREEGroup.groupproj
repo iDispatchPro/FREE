@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9CB625EE-21D8-4D99-83DB-21A197CFDEC1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Studio\FREEStudio.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DEMO\FREEDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FREEStudio">
+        <MSBuild Projects="Studio\FREEStudio.dproj"/>
+    </Target>
+    <Target Name="FREEStudio:Clean">
+        <MSBuild Projects="Studio\FREEStudio.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FREEStudio:Make">
+        <MSBuild Projects="Studio\FREEStudio.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FREEDemo">
+        <MSBuild Projects="DEMO\FREEDemo.dproj"/>
+    </Target>
+    <Target Name="FREEDemo:Clean">
+        <MSBuild Projects="DEMO\FREEDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FREEDemo:Make">
+        <MSBuild Projects="DEMO\FREEDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FREEStudio;FREEDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FREEStudio:Clean;FREEDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FREEStudio:Make;FREEDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
